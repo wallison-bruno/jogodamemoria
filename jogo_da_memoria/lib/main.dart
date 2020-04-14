@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'component/animated_dialog_box.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -7,18 +8,23 @@ void main() {
   ));
 }
 
+int pontos = 0;
+String img1 = '';
+String img2 = '';
+int id1 = 0;
+int id2 = 0;
+
+List<String> imgList = ['', '', '', '', '', '', '', ''];
+
 class JogoMemoria extends StatefulWidget {
   @override
   _JogoMemoriaState createState() => _JogoMemoriaState();
 }
 
 class _JogoMemoriaState extends State<JogoMemoria> {
-  String img1 = '';
-  String img2 = '';
-  int id1 = 0;
-  int id2 = 0;
-  int pontos = 0;
-  List<String> imgList = ['', '', '', '', '', '', '', '', ''];
+  void initState() {
+    super.initState();
+  }
 
   setAll() {
     setState(() {
@@ -29,6 +35,29 @@ class _JogoMemoriaState extends State<JogoMemoria> {
       id1 = 0;
       id2 = 0;
     });
+  }
+
+  setAllBox() {
+    setState(() {
+      imgList = ['', '', '', '', '', '', '', ''];
+      pontos = 0;
+      imgList[id1] = '';
+      imgList[id2] = '';
+      img1 = '';
+      img2 = '';
+      id1 = 0;
+      id2 = 0;
+    });
+  }
+
+  bool isFinalized() {
+    bool finalized = true;
+    imgList.forEach((element) {
+      if (element.isEmpty) {
+        return finalized = false;
+      }
+    });
+    return finalized;
   }
 
   comper(String imgUrl, int id) {
@@ -60,6 +89,11 @@ class _JogoMemoriaState extends State<JogoMemoria> {
         setAll();
       }
     }
+    setState(() {
+      if (isFinalized() == true) {
+        boxAnimation(context, setAllBox());
+      }
+    });
   }
 
   Widget bildImage(String imgUrl, int id) {
@@ -109,7 +143,7 @@ class _JogoMemoriaState extends State<JogoMemoria> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  imgList = ['', '', '', '', '', '', '', '', ''];
+                  imgList = ['', '', '', '', '', '', '', ''];
                   pontos = 0;
                   setAll();
                 });
@@ -139,32 +173,32 @@ class _JogoMemoriaState extends State<JogoMemoria> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  bildImage('assets/images/desenho01.jpg', 1),
-                  bildImage('assets/images/desenho02.jpg', 2),
+                  bildImage('assets/images/desenho01.jpg', 0),
+                  bildImage('assets/images/desenho02.jpg', 1),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  bildImage('assets/images/desenho03.jpg', 3),
-                  bildImage('assets/images/desenho04.jpg', 4),
+                  bildImage('assets/images/desenho03.jpg', 2),
+                  bildImage('assets/images/desenho04.jpg', 3),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  bildImage('assets/images/desenho01.jpg', 5),
-                  bildImage('assets/images/desenho02.jpg', 6),
+                  bildImage('assets/images/desenho01.jpg', 4),
+                  bildImage('assets/images/desenho02.jpg', 5),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  bildImage('assets/images/desenho03.jpg', 7),
-                  bildImage('assets/images/desenho04.jpg', 8),
+                  bildImage('assets/images/desenho03.jpg', 6),
+                  bildImage('assets/images/desenho04.jpg', 7),
                 ],
               ),
             ),
