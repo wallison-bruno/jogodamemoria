@@ -188,8 +188,8 @@ Future<Widget> boxAnimation(BuildContext context, Function function) async {
       color: Colors.blue,
     ), // IF YOU WANT TO ADD ICON
     yourWidget: Container(
-      child:
-          Text('Sua pntuação foi: $pontos\nPrecione OK para reiniciar o jogo!'),
+      child: Text(
+          'Sua pontuação foi: $pontos\nPrecione OK para reiniciar o jogo!'),
     ),
   );
 }
